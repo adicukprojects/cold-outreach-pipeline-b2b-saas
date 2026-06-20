@@ -11,6 +11,24 @@ const videos = [
     url: 'https://www.youtube.com/watch?v=x2VMwF_pTE0',
     title: 'I Had to Reply to This Brilliant InMail',
     date: '2024-09-11'
+  },
+  {
+    expert: 'jason-bay',
+    url: 'https://youtu.be/0w_M7twW1S4',
+    title: 'Discovery: How to run a sales call that does not feel like a sales call',
+    date: '2022-08-25'
+  },
+  {
+    expert: 'jason-bay',
+    url: 'https://youtu.be/EIfuxNkSabQ',
+    title: 'Cold Calling: Ditch the gimmicks and steal this tried and true framework instead',
+    date: '2023-03-23'
+  },
+  {
+    expert: 'jason-bay',
+    url: 'https://youtu.be/xids3VMLEUY',
+    title: 'Sales Psychology: Use these 3 principles to book more meetings and close more sales',
+    date: '2021-07-29'
   }
 ];
 
@@ -27,7 +45,7 @@ async function fetchTranscript(videoUrl) {
 async function saveTranscript(expert, title, date, transcriptText) {
   const dir = path.join('research', 'youtube-transcripts', expert);
   fs.mkdirSync(dir, { recursive: true });
-  const filename = `${title}-${date}.md`.replace(/\s+/g, '-').toLowerCase();
+  const filename = `${title}-${date}.md`.replace(/[:]/g, '').replace(/\s+/g, '-').toLowerCase();
   const filepath = path.join(dir, filename);
   const content = `# ${title}\n\n**Date:** ${date}\n**Expert:** ${expert}\n\n---\n\n${transcriptText}\n`;
   fs.writeFileSync(filepath, content);
